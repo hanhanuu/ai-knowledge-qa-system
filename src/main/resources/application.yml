@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: ai-qa-system
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterWrite=10m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+ai:
+  qwen:
+    base-url: http://localhost:8000/v1
+    api-key: demo-key
+    chat-model: Qwen/Qwen2.5-7B-Instruct
+    embedding-model: text-embedding-v4
+    timeout-seconds: 20
+    mock-enabled: true
+  rag:
+    rewrite-enabled: true
+    chunk-size: 220
+    chunk-overlap: 40
+    keyword-top-k: 5
+    vector-top-k: 5
+    fused-top-k: 6

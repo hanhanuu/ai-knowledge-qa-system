@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 知识问答系统</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="page-shell">
+    <header class="hero">
+        <div>
+            <p class="eyebrow">AI_QA_System</p>
+            <h1>AI 知识问答系统</h1>
+            <p class="hero-copy">
+                在同一页面完成知识导入、问题提问与检索轨迹查看，用于演示 Qwen 接入、RAG 检索优化与 Agent 编排链路。
+            </p>
+        </div>
+        <div class="hero-actions">
+            <button id="seed-demo" class="ghost-btn" type="button">填充演示知识</button>
+            <button id="refresh-trace" class="primary-btn" type="button">刷新轨迹</button>
+        </div>
+    </header>
+
+    <main class="content-grid">
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">知识导入</p>
+                    <h2>导入知识文档</h2>
+                </div>
+            </div>
+            <div class="form-grid">
+                <label>
+                    标题
+                    <input id="doc-title" type="text" placeholder="RAG 设计说明">
+                </label>
+                <label>
+                    元数据
+                    <input id="doc-meta" type="text" placeholder="domain=ai;owner=backend">
+                </label>
+                <label class="full-span">
+                    内容
+                    <textarea id="doc-content" rows="10" placeholder="在这里粘贴知识内容..."></textarea>
+                </label>
+                <button id="ingest-btn" class="primary-btn" type="button">导入知识</button>
+            </div>
+            <div id="ingest-result" class="result-card muted-card">暂未导入任何文档。</div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div>
+                    <p class="panel-kicker">问题提问</p>
+                    <h2>向系统提问</h2>
+                </div>
+            </div>
+            <div class="form-grid">
+                <label>
+                    会话 ID
+                    <input id="session-id" type="text" placeholder="demo-session">
+                </label>
+                <label class="full-span">
+                    问题
+                    <textarea id="question-input" rows="6" placeholder="为什么 RAG 需要查询重写？"></textarea>
+                </label>
+                <label class="inline-row">
+                    <input id="force-retrieval" type="checkbox">
+                    强制走检索问答链路
+                </label>
+                <button id="ask-btn" class="primary-btn" type="button">开始提问</button>
+            </div>
+            <div id="answer-card" class="result-card">
+                <h3>回答结果</h3>
+                <p class="empty-text">暂未生成回答。</p>
+            </div>
+            <div id="tool-card" class="result-card">
+                <h3>工具调用</h3>
+                <p class="empty-text">暂未执行工具调用。</p>
+            </div>
+            <div id="evidence-card" class="result-card">
+                <h3>检索证据</h3>
+                <p class="empty-text">暂未返回证据。</p>
+            </div>
+        </section>
+    </main>
+
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="panel-kicker">可观测性</p>
+                <h2>知识命中率与检索指标</h2>
+            </div>
+        </div>
+        <div id="metrics-card" class="trace-grid">
+            <div class="result-card">
+                <h3>指标概览</h3>
+                <p class="empty-text">暂未生成指标。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-header">
+            <div>
+                <p class="panel-kicker">执行轨迹</p>
+                <h2>最近一次 Agent 路由</h2>
+            </div>
+        </div>
+        <div id="trace-card" class="trace-grid">
+            <div class="result-card">
+                <h3>路由结果</h3>
+                <p class="empty-text">暂未生成轨迹。</p>
+            </div>
+        </div>
+        <div id="recent-traces" class="result-card">
+            <h3>最近轨迹</h3>
+            <p class="empty-text">暂未记录历史轨迹。</p>
+        </div>
+    </section>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
